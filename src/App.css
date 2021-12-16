@@ -9,6 +9,13 @@ ul {
   list-style-type: none;
 }
 
+button {
+  background-color: transparent;
+  border: 1px solid teal;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 5px 15px;
+}
 input {
   background-color: transparent;
   border: none;
@@ -48,4 +55,17 @@ p {
 
 .task__text-input {
   width: 100%;
+}
+
+.filter {
+  margin-top: 40px;
+}
+
+.filter__btn + .filter__btn {
+  margin-left: 10px;
+}
+
+.form__input {
+  padding: 5px 20px;
+  margin-right: 20px;
 }

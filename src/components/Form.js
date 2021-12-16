@@ -32,6 +32,7 @@ export default function Form({ createTask }) {
                 type='text' 
                 value={value} 
                 onChange={changeInput}
+                placeholder='Write...'
             />
             <button onClick={handleCreateTask}>create post</button>
       </form>
