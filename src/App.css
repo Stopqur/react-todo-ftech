@@ -8,13 +8,23 @@ ul {
   padding: 0;
   list-style-type: none;
 }
+
 * {
   box-sizing: border-box;
 }
 
+button {
+  background-color: transparent;
+  padding: 5px 15px;
+  border: 1px solid orange;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 input {
   background-color: transparent;
-  border: none;
+  border: 1px solid lightblue;
+  border-radius: 4px;
   max-width: 100%;
   padding: 0;
   margin: 0;
@@ -23,10 +33,27 @@ input {
 p {
   margin: 0;
 }
+
 .form {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
+.form__input {
+  padding: 10px;
+}
+
+input:focus {
+  border: 1px solid indigo;
+  outline: 1px solid indigo;
+}
+
+.form__btn {
+  margin-left: 30px;
+}
+
+.tasksList {
+  margin-bottom: 30px;  
+}
 
 .task {
   display: flex;
@@ -40,10 +67,6 @@ p {
   margin-top: 20px;
 }
 
-.form__input {
-  border: 1px solid lightblue;
-}
-
 .task__text {
   width: 100%;
   padding: 20px;
@@ -51,4 +74,9 @@ p {
 
 .task__text-input {
   width: 100%;
+  padding: 10px;
+}
+
+.filter__btn + .filter__btn {
+  margin-left: 20px;
 }

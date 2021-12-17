@@ -1,7 +1,7 @@
 import React from 'react';
 import Task from './Task';
 
-function TasksList({ filterTasks, removeTask, checkTask, changeTask }) {
+function TasksList({ filterTasks, removeTask, checkTask, changeTask, setTaskTypeField, setTaskCompleted, setTaskDelete }) {
     return (
         <ul className='tasksList'>
             {filterTasks.length === 0
@@ -15,6 +15,9 @@ function TasksList({ filterTasks, removeTask, checkTask, changeTask }) {
                     id={index} 
                     key={task.id}
                     removeTask={removeTask}
+                    setTaskTypeField={setTaskTypeField}
+                    setTaskCompleted={setTaskCompleted}
+                    setTaskDelete={setTaskDelete}
                 />
                 )
             })

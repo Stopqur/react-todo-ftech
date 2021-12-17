@@ -1,28 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { setInputText } from '../store/form/actions';
 
-export default function Form({ createTask }) {
-    const [value, setValue] = useState('')
 
-    function changeInput(e) {
-        setValue(e.target.value)
-      } 
+const mapStateToProps = (state) => {
+    return {
+        inputText: state.form.inputText
+    } 
+}
 
-    function handleCreateTask(e) {
+const mapDispatchToProps = {
+    setInput: setInputText
+}
+
+function Form( { inputText, setInput, createTask }) {
+
+    const changeInput = (e) => {
+        setInput(e.target.value)
+    }
+
+    const handleCreateTask = (e) => {
         e.preventDefault()
-        if(value !== '') {
+        if(inputText !== '') {
             const newTask = {
-                'title': value,
+                'title': inputText,
                 'id': Date.now().toString(),
-                completed: false
+                completed: false,
+                typeField: true
             }
             createTask(newTask)
-            setValue('')
-            console.log('eok')
-        } else {
-            console.log('else')
-
+            setInput('')
         }
-        
     } 
 
     return (
@@ -30,11 +38,16 @@ export default function Form({ createTask }) {
             <input 
                 className='form__input'
                 type='text' 
-                value={value} 
+                value={inputText} 
                 onChange={changeInput}
                 placeholder='Write...'
             />
-            <button onClick={handleCreateTask}>create post</button>
+            <button 
+                className='form__btn'
+            onClick={handleCreateTask}
+            >create post</button>
       </form>
     )
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form)

@@ -1,79 +1,78 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import TasksList from './components/TasksList';
 import Form from './components/Form'
 import Filtration from './components/Filtration';
 
-function App() {
-  const [filterTasks, setFilterTasks] = useState([])
-  const [tasks, setTasks] = useState([])
-  
-  let createTask = (newPost) => {
-    setTasks([...tasks, newPost])
-    setFilterTasks([...tasks, newPost])
+import { connect } from 'react-redux'
+import {setTasks, setFilterTasks, setTaskTitle, setTaskCompleted, setTaskTypeField, 
+        setTaskDelete, setFiltrationAll, setFiltrationDone, setFiltrationUnDone } from './store/appComponent/actions'
+
+
+
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.app.tasks,
+    filterTasks: state.app.filterTasks
   }
-
-  let removeTask = (task) => {
-    setTasks(tasks.filter(item => item.id !== task.id))
-    setFilterTasks(tasks.filter(item => item.id !== task.id))
-  }
-
-  let changeTask = (id, newText) => {
-    const editArr = tasks.map(item => {
-      if(item.id === id) {
-        item.title = newText
-        return item
-      } else {
-        return item
-      }
-    })
-    setFilterTasks(editArr)
-    // console.log(tasks)
-  }
-
-  let checkTask = (id) => {
-    const editArr = tasks.map(item => {
-      if(item.id === id) {
-        item.completed = !item.completed
-        return item
-      } else {
-        return item
-      }
-    })
-    setFilterTasks(editArr) 
-  }
-
-  //Filtration 
-  let filterCompleted = () => {
-    setFilterTasks(tasks.filter(item => item.completed === true))
-  }
-
-  let filterUncompleted = () => {
-    setFilterTasks(tasks.filter(item => item.completed === false))
-  }
-
-  let filterAll = () => {
-    setFilterTasks([...tasks])
-  }
-
-
-  return (
-    <div className="App">
-      <h1 className='title'>todo list</h1>
-      <Form createTask={createTask}/>
-      <TasksList 
-        removeTask={removeTask} 
-        filterTasks={filterTasks}
-        changeTask={changeTask}
-        checkTask={checkTask}
-      />
-      <Filtration 
-        filterCompleted={filterCompleted}
-        filterUncompleted={filterUncompleted}
-        filterAll={filterAll}
-      />
-    </div>
-  )
 }
 
-export default App;
+const mapDispatchToProps = {
+  setTasks: setTasks,
+  setFilterTasks: setFilterTasks,
+  setTaskTitle: setTaskTitle,
+  setTaskCompleted: setTaskCompleted,
+  setTaskTypeField: setTaskTypeField,
+  setTaskDelete,
+  setFiltrationAll,
+  setFiltrationDone,
+  setFiltrationUnDone,
+}
+
+function App( { 
+            tasks, 
+            filterTasks, 
+            setTasks, 
+            setFilterTasks, 
+            setTaskTitle, 
+            setTaskCompleted, 
+            setTaskTypeField ,
+            setTaskDelete,
+            setFiltrationAll,
+            setFiltrationDone,
+            setFiltrationUnDone
+        }) 
+
+  {
+    let createTask = (newPost) => {
+      setTasks(newPost)
+      setFilterTasks(newPost)
+    }
+
+    let removeTask = (task) => {
+      setTasks(tasks.filter(item => item.id !== task.id))
+      setFilterTasks(tasks.filter(item => item.id !== task.id))
+    }
+
+    return (
+        <div className="App">
+          <h1 className='title'>todo list</h1>
+          <Form createTask={createTask}/>
+          <TasksList 
+            removeTask={removeTask} 
+            filterTasks={filterTasks}
+            changeTask={setTaskTitle}
+            setTaskCompleted={setTaskCompleted}
+            setTaskTypeField={setTaskTypeField}
+            setTaskDelete={setTaskDelete}
+          />
+          <Filtration 
+            setFiltrationAll={setFiltrationAll}
+            setFiltrationDone={setFiltrationDone}
+            setFiltrationUnDone={setFiltrationUnDone}
+          />
+        </div>
+    )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

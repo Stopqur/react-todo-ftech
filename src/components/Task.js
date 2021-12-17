@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function Task({task, removeTask, changeTask, checkTask }) {
-    const[textTask, setTextTask] = useState(task.title)
-    const [flagDisabled, setFlagDisabled] = useState(true)
-    // const [taskChecked, setTaskChecked] = useState(task.completed)
-
-    function activeInput() {
-        setFlagDisabled(false)
+function Task({task, removeTask, changeTask, setTaskCompleted, setTaskTypeField, setTaskDelete }) {    
+    // function handleChangeTask(id, text) {
+    //     setFlagDisabled(true)
+    //     changeTask(id, text)
+    // }
+    const handleChangeTypeField = () => {
+        console.log('double')
+        setTaskTypeField(!task.typeField, task.id)
     }
 
-    function handleChangeTask() {
-        setFlagDisabled(true)
-        changeTask(task.id, textTask)
-    }
-
-    function handleCheckTask() {
-        checkTask(task.id)
+    const handleCheckTask = () => {
+        setTaskCompleted(task.id, !task.completed)
         // setTaskChecked(task.completed)
+    }
+
+    const handleDeleteTask = () => {
+        setTaskDelete(task.id)
     }
     
     return (
@@ -31,27 +31,26 @@ function Task({task, removeTask, changeTask, checkTask }) {
                     task.completed === true 
                     ? {textDecoration: 'line-through'}
                     : {textDecoration: 'none'}
-            }
+                }
                 className='task__text'
-                 onDoubleClick={activeInput}
+                onDoubleClick={handleChangeTypeField}
             >
-                {(flagDisabled)
-                ? <p>{textTask}</p>
+                {task.typeField
+                ? <p>{task.title}</p>
                 : <input 
                     className='task__text-input'
-                    value={textTask}
-                    onChange={e => setTextTask(e.target.value)}
-                    disabled={flagDisabled}
+                    autoFocus="autofocus"
+                    value={task.title}
+                    onChange={e => changeTask(task.id, e.target.value)}
                     onKeyPress={e => {
                         if(e.key === 'Enter') {
-                            handleChangeTask()
+                            handleChangeTypeField()
                         }
                     }}
-                    
-                    
+                
                   />}
             </div>
-            <button onClick={() => removeTask(task)}>удалить</button>
+            <button onClick={handleDeleteTask}>удалить</button>
             
         </li>
     )
