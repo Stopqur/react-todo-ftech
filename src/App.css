@@ -21,6 +21,12 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: orange;
+  color: #fff;
+  transition: .2s;
+}
+
 input {
   background-color: transparent;
   border: 1px solid lightblue;
@@ -61,6 +67,12 @@ input:focus {
   justify-content: space-between;
   padding: 5px 20px;
   border: 1px solid lightblue;
+}
+
+.task:hover {
+  border: 1px solid olivedrab ;
+  border-radius: 4px;
+  transition: .2s;
 }
 
 .task + .task {
