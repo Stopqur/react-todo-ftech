@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import './App.css';
-import TasksList from './components/TasksList';
 import Form from './components/Form'
 import Filtration from './components/Filtration';
+
+import './App.css';
+import TasksList from './components/TasksList';
 
 const App = () => {
   const [filterTasks, setFilterTasks] = useState([])
