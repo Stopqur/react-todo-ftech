@@ -5,7 +5,7 @@ import {
   setFiltrationAll, 
   setFiltrationDone, 
   setFiltrationUnDone 
-} from '../store/appComponent/actions'
+} from '../store/tasksList/actions'
 
 const mapStateToProps = (state) => {
   return {

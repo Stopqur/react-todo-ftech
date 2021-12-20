@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { allTasksReducer } from './appComponent/reducer'
+import { allTasksReducer } from './tasksList/reducer'
 import { inputTextReducer } from './form/reducer'
 
 export default combineReducers({ 
-  app: allTasksReducer,
+  tasksList: allTasksReducer,
   form: inputTextReducer
 })

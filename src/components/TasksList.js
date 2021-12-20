@@ -8,13 +8,13 @@ import {setTasks,
   setTaskCompleted, 
   setTaskTypeField, 
   setTaskDelete
-} from '../store/appComponent/actions'
+} from '../store/tasksList/actions'
 
 const mapStateToProps = (state) => {
-  console.log(state.app.filterTasks)
+  console.log(state.tasksList.filterTasks)
   return {
-    tasks: state.app.tasks,
-    filterTasks: state.app.filterTasks
+    tasks: state.tasksList.tasks,
+    filterTasks: state.tasksList.filterTasks
   }
 }
 

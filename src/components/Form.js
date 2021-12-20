@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setInputText } from '../store/form/actions';
-import { setTasks, setFilterTasks } from '../store/appComponent/actions'
+import { setTasks, setFilterTasks } from '../store/tasksList/actions'
 
 const mapStateToProps = (state) => {
   return {
