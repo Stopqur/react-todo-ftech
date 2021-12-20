@@ -1,52 +1,58 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setInputText } from '../store/form/actions';
-
+import { setTasks, setFilterTasks } from '../store/appComponent/actions'
 
 const mapStateToProps = (state) => {
-    return {
-        inputText: state.form.inputText
-    } 
+  return {
+    inputText: state.form.inputText,
+  } 
 }
 
 const mapDispatchToProps = {
-    setInput: setInputText
+  setInputText: setInputText,
+  setTasks,
+  setFilterTasks,
 }
 
-function Form( { inputText, setInput, createTask }) {
+const Form = ({ inputText, setInputText, setFilterTasks, setTasks }) => {
+  let createTask = (newPost) => {
+    setTasks(newPost)
+    setFilterTasks(newPost)
+  }
 
-    const changeInput = (e) => {
-        setInput(e.target.value)
+  const changeInput = (e) => {
+    setInputText(e.target.value)
+  }
+
+  const handleCreateTask = (e) => {
+    e.preventDefault()
+    if(inputText === '') return;
+    const newTask = {
+      title: inputText,
+      id: Date.now().toString(),
+      completed: false,
+      typeField: true
     }
+    createTask(newTask)
+    setInputText('')
+  } 
 
-    const handleCreateTask = (e) => {
-        e.preventDefault()
-        if(inputText !== '') {
-            const newTask = {
-                'title': inputText,
-                'id': Date.now().toString(),
-                completed: false,
-                typeField: true
-            }
-            createTask(newTask)
-            setInput('')
-        }
-    } 
-
-    return (
-        <form className='form'>
-            <input 
-                className='form__input'
-                type='text' 
-                value={inputText} 
-                onChange={changeInput}
-                placeholder='Write...'
-            />
-            <button 
-                className='form__btn'
-            onClick={handleCreateTask}
-            >create post</button>
-      </form>
+  return (
+    <form className='form'>
+      <input 
+        className='form__input'
+        type='text' 
+        value={inputText} 
+        onChange={changeInput}
+        placeholder='Write...'
+      />
+      <button 
+        className='form__btn'
+        onClick={handleCreateTask}
+      >create post
+      </button>
+    </form>
     )
 }
 
