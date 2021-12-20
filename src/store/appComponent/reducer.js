@@ -12,7 +12,8 @@ export const allTasksReducer = (state = defaultState, action) => {
       }
           
     case 'DELETE_TASK':
-      const newDeleteTasks = state.filterTasks.filter(item => item.id !== action.payload) 
+      const newDeleteTasks = state.tasks.filter(item => item.id !== action.payload) 
+      console.log(newDeleteTasks)
       return {
         tasks: [...newDeleteTasks],
         filterTasks: [...newDeleteTasks]

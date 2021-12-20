@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import mainReducer from './store/reducers'
+
+import App from './App';
 
 const store = createStore(mainReducer)
 ReactDOM.render(
