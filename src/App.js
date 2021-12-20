@@ -4,34 +4,34 @@ import TasksList from './components/TasksList';
 import Form from './components/Form'
 import Filtration from './components/Filtration';
 
-function App() {
+const App = () => {
   const [filterTasks, setFilterTasks] = useState([])
   const [tasks, setTasks] = useState([])
   
-  let createTask = (newPost) => {
+  const createTask = (newPost) => {
     setTasks([...tasks, newPost])
     setFilterTasks([...tasks, newPost])
   }
 
-  let removeTask = (task) => {
+  const removeTask = (task) => {
     setTasks(tasks.filter(item => item.id !== task.id))
     setFilterTasks(tasks.filter(item => item.id !== task.id))
   }
 
-  let changeTask = (id, newText) => {
+  const changeTask = (id, newText) => {
     const editArr = tasks.map(item => {
       if(item.id === id) {
         item.title = newText
+
         return item
       } else {
         return item
       }
     })
     setFilterTasks(editArr)
-    // console.log(tasks)
   }
 
-  let checkTask = (id) => {
+  const checkTask = (id) => {
     const editArr = tasks.map(item => {
       if(item.id === id) {
         item.completed = !item.completed
@@ -43,19 +43,43 @@ function App() {
     setFilterTasks(editArr) 
   }
 
-  //Filtration 
-  let filterCompleted = () => {
+  const changeTextTask = (text, id) => {
+    const editTextArr = tasks.map(item => {
+      if(item.id === id) {
+        item.title = text
+        return item
+      } else {
+        return item
+      }
+    })
+    setFilterTasks([...editTextArr])
+    setTasks([...editTextArr])
+  }
+
+  const changeFieldTask = (id) => {
+    const newFieldTasks = tasks.map(item => {
+      if(item.id === id) {
+        item.typeField = !item.typeField
+        return item
+      } else {
+        return item
+      }
+    })
+    setTasks([...newFieldTasks])
+    setFilterTasks([...newFieldTasks])
+  }
+
+  const filterCompleted = () => {
     setFilterTasks(tasks.filter(item => item.completed === true))
   }
 
-  let filterUncompleted = () => {
+  const filterUncompleted = () => {
     setFilterTasks(tasks.filter(item => item.completed === false))
   }
 
-  let filterAll = () => {
+  const filterAll = () => {
     setFilterTasks([...tasks])
   }
-
 
   return (
     <div className="App">
@@ -66,6 +90,8 @@ function App() {
         filterTasks={filterTasks}
         changeTask={changeTask}
         checkTask={checkTask}
+        changeTextTask={changeTextTask}
+        changeFieldTask={changeFieldTask}
       />
       <Filtration 
         filterCompleted={filterCompleted}
